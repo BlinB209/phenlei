@@ -1,0 +1,235 @@
+#########################################################################
+#                     General Control Parameter                         #
+#########################################################################
+// maxSimuStep: The max simulation step, don't care simulation is restart or not.
+// intervalStepFlow: The step intervals for flow variables file 'flow.dat' saved.
+// intervalStepPlot: The step intervals for tecplot visual file 'tecflow.dat' saved.
+// intervalStepForce: The step intervals for aerodynamics coefficients file 'aircoef.dat' saved.
+// intervalStepRes: The step intervals for residual 'res.dat' saved.
+
+int maxSimuStep       = 20;
+
+int intervalStepFlow  = 10;
+int intervalStepPlot  = 10;
+int intervalStepForce = 10;
+int intervalStepRes   = 1;
+
+// ifLowSpeedPrecon: Precondition process to accelerate convergence for low speed flow.
+//                   0 -- no precondition process. (default, mach > 0.3)
+//                   1 -- carry out precondition process. (mach number <= 0.3)
+int ifLowSpeedPrecon = 0;
+
+#########################################################################
+#                       File In or Out                                  #
+#########################################################################
+// gridtype: Grid type of original grid file.
+//           0 -- Unstructured grid.
+//           1 -- Structured grid.
+// axisup:   Type of Cartisien coordinates system, used in grid conversion.
+//           1 -- Y upward. (default)
+//           2 -- Z upward.
+// from_gtype: Type of grid data type in grid conversion process.
+//            -1 -- MULTI_TYPE.
+//             1 -- PHengLEI, *.fts.
+//             2 -- CGNS, *.cgns.
+//             3 -- Plot3D type of structured grid, *.dat/*.grd.
+//             4 -- Fieldview type of unstructured grid, *.dat/*.inp.
+//             5 -- Fluent, *.cas/*.msh.
+//             6 -- Ustar, mgrid.in.
+//             7 -- Hybrid, include both of unstructured and structured grid, *.fts.
+//             8 -- GMSH, *.msh.
+// from_gfile: path of original grid file.
+
+int    gridtype   = 0;
+int    axisup     = 1;
+int    from_gtype = 5;
+string from_gfile = "./grid/rae2822_hybrid2d.cas";
+
+#########################################################################
+#                       Inflow Parameter                                #
+#########################################################################
+// refMachNumber: Mach number.
+// attackd: Angle of attack.
+// angleSlide: Angle of sideslip.
+// inflowParaType: The type of inflow parameters.
+//                 0 -- the nondimensional conditions.
+//                 1 -- the flight conditions.
+//                 2 -- the experiment conditions.
+//                 3 -- the subsonic boundary conditions.
+// refReNumber: Reynolds number, which is based unit length, unit of 1/m.
+// refDimensionalTemperature: Dimensional reference temperature, or the total temperature only for the experiment condition.
+// refDimensionalPressure: Dimensional reference pressure, or the total pressure only for the experiment condition.
+// height: Fly height, unit of km.
+// gridScaleFactor: The customizable unit of the grid, default value is 1.0 for meter.Common dimensions like:
+//                    1 dm = 0.1  m.
+//                    1 cm = 0.01 m.
+//                    1 mm = 0.001m.
+//                    1 inch             = 0.0254m.
+//                    1 foot = 12 inches = 0.3048m.
+//                    1 yard = 3  feet   = 0.9144m.
+// forceRefenenceLength, forceRefenenceLengthSpanWise, forceRefenenceArea: Reference length, SpanWise length and area, independent of grid unit.
+// TorqueRefX, TorqueRefY, TorqueRefZ: Reference point, independent of grid unit.
+
+double refMachNumber = 0.2;
+double attackd       = 2.79;
+double angleSlide    = 0.00;
+
+int inflowParaType = 0;
+double refReNumber = 6.5e6;
+double refDimensionalTemperature = 288.15;
+
+//int inflowParaType = 1;
+//double height = 0.001;
+
+double gridScaleFactor = 1.0;
+
+double forceRefenenceLengthSpanWise = 1.0;    // unit of meter.
+double forceRefenenceLength = 1.0;            // unit of meter.
+double forceRefenenceArea = 1.0;              // unit of meter^2.
+double TorqueRefX = 0.0;                      // unit of meter. 
+double TorqueRefY = 0.0;                      // unit of meter.
+double TorqueRefZ = 0.0;                      // unit of meter.
+
+#########################################################################
+#                       Physical models                                 #
+#########################################################################
+// viscousType: Viscous model.
+//           0 -- Euler.
+//           1 -- Lamilar.
+//           3 -- 1eq turbulent.
+//           4 -- 2eq turbulent.
+// viscousName: Laminar or tubulent model.
+//              -- "1eq-sa", when viscousType = 3.
+//              -- "2eq-kw-menter-sst", when viscousType = 4.
+// DESType: Type of DES.
+//          0 -- RANS.(default)
+//          1 -- DES.
+//          2 -- DDES.
+//          3 -- IDDES.
+
+//int    viscousType    = 0;
+//string viscousName = "Euler";
+
+//int    viscousType    = 1;
+//string viscousName = "laminar";
+
+int    viscousType    = 3;
+string viscousName = "1eq-sa";
+
+//int    viscousType    = 4;
+//string viscousName = "2eq-kw-menter-sst";
+
+int DESType = 0;
+
+int roeEntropyFixMethod = 3;
+double roeEntropyScale  = 1.0;
+#########################################################################
+#                       Spatial Discretisation                          #
+#########################################################################
+#*******************************************************************
+#                       Struct Solver                              *
+#*******************************************************************
+// str_limiter_name: Limiter of struct grid.
+//                   -- "3rdsmooth", "smooth".
+//                   -- "nolim", no limiter.
+
+string str_limiter_name   = "smooth";
+
+#*******************************************************************
+#                       UnStruct Solver                            *
+#*******************************************************************
+// uns_limiter_name: Limiter of Unstruct grid.
+//                   -- "vencat".
+//                   -- "1st", meaning accuracy of first-order.
+//                   --  "nolim", no limiter.
+// venkatCoeff: Coefficient of vencat limiter, when uns_limiter_name = 'vencat'.
+//              The smaller the value, the more robust it is.
+
+string uns_limiter_name = "vencat";
+double venkatCoeff      = 50.0;
+
+#########################################################################
+#                       Temporal Discretisation                         #
+#########################################################################
+// iunsteady: Steady or unsteady.
+//            0 -- steady.
+//            1 -- unsteay.
+// CFLEnd: The CFL number, [0.1, 100].
+//         The bigger the value, the convergence faster but lower robustness.
+// nLUSGSSweeps: Number of Sub-iteration of LU-SGS.
+//               0 -- is recommended for structured solver.
+//             1-3 -- is recommended for unstructured solver.
+
+int iunsteady = 0;
+
+double CFLEnd = 100.0;
+
+int nLUSGSSweeps = 5;
+
+#########################################################################
+#                       Multi-Grid parameters                           #
+#########################################################################
+// nMGLevel: The number of Multi-Grid level.
+//           = 1 -- single-level.
+//           > 1 -- multi-level.
+// flowInitStep: Flow initialization step, 0 - 500 is suggested.
+//               Multi-Grid : Number of steps computing on coarse grid, during flow initialization.
+//               Single-Grid: Number of steps computing using first-order with vanleer, during flow initialization.
+
+int nMGLevel = 1;
+int flowInitStep = 100;
+
+#########################################################################
+#                       File In or Out                                  #
+#########################################################################
+// gridtype: Grid type of original grid file.
+//           0 -- Unstructured grid.
+//           1 -- Structured grid.
+// axisup:   Type of Cartisien coordinates system, used in grid conversion.
+//           1 -- Y upward. (default)
+//           2 -- Z upward.
+// from_gtype: Type of grid data type in grid conversion process.
+//            -1 -- MULTI_TYPE.
+//             1 -- PHengLEI, *.fts.
+//             2 -- CGNS, *.cgns.
+//             3 -- Plot3D type of structured grid, *.dat/*.grd.
+//             4 -- Fieldview type of unstructured grid, *.dat/*.inp.
+//             5 -- Fluent, *.cas/*.msh.
+//             6 -- Ustar, mgrid.in.
+//             7 -- Hybrid, include both of unstructured and structured grid, *.fts.
+//             8 -- GMSH, *.msh.
+// from_gfile: path of original grid file.
+
+int    gridtype   = 0;
+int    axisup     = 1;
+int    from_gtype = 5;
+string from_gfile = "./grid/rae2822_hybrid2d.cas";
+
+// ----------------- Advanced Parameters, DO NOT care it ----------------
+// plotFieldType: If dump out the whole field results to tecplot or not, 0 / 1.
+// nVisualVariables: Number of variables want to be dumped for tecplot visualization.
+// visualVariables:  Variable types dumped, listed as following:
+//                   -- density(0), u(1), v(2), w(3), pressure(4), temperature(5), mach(6),
+//                   -- viscosityLaminar(7), viscosityTurbulent(8),
+//                   -- vorticity_x(9), vorticity_y(10), vorticity_z(11), vorticityMagnitude(12),
+//                   -- strain_rate(13), Q_criteria(14), Cp(15), timeStep(16), volume(17),
+//                   -- modeledTKE(18), modeleddissipationrate(19), SSTF1(20), SSTF2(21).
+// Important Warning: Array size of visualVariables MUST be equal to nVisualVariables!!!
+// Variables order must from small to big.
+int plotFieldType = 0;
+int nVisualVariables  = 8;
+int visualVariables[] = [0, 1, 2, 3, 4, 5, 6, 15];
+
+// limitVariables: Limit model (It is useful only if limitVector is 0).
+//                 0 -- limit only for pressure and denstiny, then get the min value.
+//                 1 -- limit for every variables, then get the min value.
+// limitVector:
+//              0 -- Each variable use the same limiter coefficient.
+//              1 -- Each variable use the respective limiter coefficients.
+// reconmeth:
+//            0 -- When reconstruct face value, Q+, Q- use respective limiter coefficients.
+//            1 -- Q+, Q- use the min limiter coefficients of left and right cell.
+
+int reconmeth = 1;
+int limitVariables = 0;
+int limitVector = 0;

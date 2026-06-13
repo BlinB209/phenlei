@@ -1,0 +1,237 @@
+# nBoundaryConditions: Number of global boundary conditions.
+# bcName             : Boundary condition name.
+# bcType(in PHengLEI): Boundary condition type.
+# dumpHingeMoment    : whether or not dump monment of hinge(0/1, if 0 the moment of hinge is zero)
+# localCoordAxis0    : lcoal coordinates axis, defined for calculation of moment of hinge.
+# localCoordAxis1    : lcoal coordinates axis, defined for calculation of moment of hinge(rotation around the axis O->Z).
+int nBoundaryConditions = 0;
+# If the boundary condition type is SOLID_SURFACE, then the parameters should be set as follows:
+string bcName = "DownWall";
+{
+  int bcType = 2;
+  double forceReferenceLength = 1.0;
+  double forceReferenceLengthSpanWise = 1.0;
+  double forceReferenceArea = 1.0;
+  double TorqueRefX = 0.0;
+  double TorqueRefY = 0.0;
+  double TorqueRefZ = 0.0;
+}
+string bcName = "UpWall";
+{
+  int bcType = 2;
+  double forceReferenceLength = 1.0;
+  double forceReferenceLengthSpanWise = 1.0;
+  double forceReferenceArea = 1.0;
+  double TorqueRefX = 0.0;
+  double TorqueRefY = 0.0;
+  double TorqueRefZ = 0.0;
+  int    dumpHingeMoment   =  0;
+  double localCoordAxis0[] = [3.81856010431 -0.52758233177 0.9137994038];
+  double localCoordAxis1[] = [3.93624962598 -0.13193438962 0.2285170661];
+}
+string bcName = "Wall";
+{
+  int bcType = 2;
+  int viscousType = 1;
+  double wallTemperature = -1.0;
+  double forceReferenceArea = 1.0;
+  double uWall = 0.0;
+  double vWall = 0.0;
+  double wWall = 0.0;
+}
+# If the boundary condition type is FARFIELD, then the parameters should be set as follows:
+string bcName = "Farfield1";
+{
+  int bcType = 4;
+  int inflowParaType = 0; 
+  double refMachNumber = 0.1;
+  double attackd = 0;
+  double angleSlide = 0;
+  double refReNumber = 2.0e5;
+  double refDimensionalTemperature = 293;
+}
+string bcName = "Farfield2";
+{
+  int bcType = 4;
+  int inflowParaType = 1; 
+  double refMachNumber = 0.1;
+  double attackd = 0;
+  double angleSlide = 0;
+  double height = 10.0;
+}
+string bcName = "Farfield3";
+{
+  int bcType = 4;
+  int inflowParaType = 4; 
+  double refDimensionalVelocity = 1000.0;
+  double refDimensionalDensity = 1.0e3;
+  double attackd = 0;
+  double angleSlide = 0;
+  double refDimensionalTemperature = 293;
+}
+string bcName = "Farfield4";
+{
+  int bcType = 4;
+  int inflowParaType = 5; 
+  double refDimensionalVelocity = 1000.0;
+  double refDimensionalPressure = 1.0e5;
+  double attackd = 0;
+  double angleSlide = 0;
+  double refDimensionalTemperature = 293;
+}
+string bcName = "Farfield5";
+{
+  int bcType = 4;
+  int inflowParaType = 6;
+  double refMachNumber = 0.1;
+  double attackd       = 0.00;
+  double angleSlide    = 0.00;
+  double refDimensionalTemperature = 293;
+  double refDimensionalPressure = 8886.06;
+}
+string bcName = "Farfield6";
+{
+  int bcType = 4;
+  int inflowParaType = 9;
+  double primDensity = 41.45637;
+  double primU = 0.0;
+  double primV = 0.543918;
+  double primW = 0.0;
+  double primPressure = 8.76743560;
+}
+
+string bcName = "Farfield7";
+{
+  int bcType = 4;
+  int inflowParaType = 8;
+  double refDimensionalVelocity = 15;
+  double refDimensionalHeight = 10;
+  double powerLawCoefficient = 0.25;
+  double refDimensionalPressure = 101325;
+  double refDimensionalTemperature = 271.97;
+}
+
+# If the boundary condition type is INFLOW, then the parameters should be set as follows:
+string bcName = "Inflow1";
+{
+  int bcType = 5;
+  int inflowParaType = 0; 
+  double refMachNumber = 0.1;
+  double attackd = 0;
+  double angleSlide = 0;
+  double refReNumber = 2.0e5;
+  double refDimensionalTemperature = 293;
+}
+string bcName = "Inflow2";
+{
+  int bcType = 5;
+  int inflowParaType = 1; 
+  double refMachNumber = 0.1;
+  double attackd = 0;
+  double angleSlide = 0;
+  double height = 0.001
+}
+string bcName = "Inflow3";
+{
+  int bcType = 5;
+  int inflowParaType = 4; 
+  double refDimensionalVelocity = 1000.0;
+  double refDimensionalDensity = 1.0e3;
+  double attackd = 0;
+  double angleSlide = 0;
+  double refDimensionalTemperature = 293;
+}
+string bcName = "Inflow4";
+{
+  int bcType = 5;
+  int inflowParaType = 5; 
+  double refDimensionalVelocity = 1000.0;
+  double refDimensionalPressure = 1.0e5;
+  double attackd = 0;
+  double angleSlide = 0;
+  double refDimensionalTemperature = 293;
+}
+string bcName = "Inflow5";
+{
+  int bcType = 5;
+  int inflowParaType = 6;
+  double refMachNumber = 0.1;
+  double attackd       = 0.00;
+  double angleSlide    = 0.00;
+  double refDimensionalTemperature = 293;
+  double refDimensionalPressure = 8886.06;
+}
+string bcName = "Inflow6";
+{
+  int bcType = 5;
+  int inflowParaType = 9;
+  double primDensity = 41.45637;
+  double primU = 0.0;
+  double primV = 0.543918;
+  double primW = 0.0;
+  double primPressure = 8.76743560;
+}
+string bcName = "Inflow10";
+{
+  int bcType = 5;
+  int inflowParaType = 10; 
+  int nTrajectoryVariables = 5;
+  double time[] = [0.0, 1.00E-02, 2.00E-02, 3.00E-02, 8.00E-02];
+  double pressure[] = [1271186,1505084,1733333,1967231,2574576];
+  double velocity[] = [1075,1075,1075,1075,1075];
+  double temperature[] = [3454,3454,3454,3454,3454];
+}
+string bcName = "Inflow11";
+{
+  int bcType = 5;
+  int inflowParaType = 8;
+  double refDimensionalVelocity = 15;
+  double refDimensionalHeight = 10;
+  double powerLawCoefficient = 0.25;
+  double refDimensionalPressure = 101325;
+  double refDimensionalTemperature = 271.97;
+}
+# If the boundary condition type is PRESSURE_INLET, then the parameters should be set as follows:
+string bcName = "PressureInlet";
+{
+  int bcType = 52;
+  double totalPressure = 118309.784;
+  double totalTemperature = 302.4;
+  double direction_inlet[] = 1, 0, 0;
+}
+# If the boundary condition type is PRESSURE_OUTLET, then the parameters should be set as follows:
+string bcName = "PressureOutlet";
+{
+  int bcType = 62;
+  double staticPressure = 115056.0;
+}
+# If the boundary condition type is MASS_FLOW_INLET, then the parameters should be set as follows:
+string bcName = "MassFlowInlet";
+{
+  int bcType = 53;
+  double massFlow = 0.70666;
+  double totalTemperature = 216.6666667;
+  double direction_inlet[] = [1.0, 0.0, 0.0];
+}
+# If the boundary condition type is MASS_FLOW_OUTLET, then the parameters should be set as follows:
+string bcName = "MassFlowOutlet";
+{
+  int bcType = 63;
+  double massFlow = 0.500;
+}
+# 'bcType' is defined as following:
+#     -2 : WAKE
+#     -1 : INTERFACE
+#      0 : NO_BOUNDARY_CONDITION
+#      1 : EXTRAPOLATION
+#      2 : SOLID_SURFACE
+#      3 : SYMMETRY
+#      4 : FARFIELD
+#      5 : INFLOW
+#      6 : OUTFLOW
+#      52: PRESSURE_INLET
+#      62: PRESSURE_OUTLET
+#      53: MASS_FLOW_INLET
+#      63: MASS_FLOW_OUTLET
+#      61: OUTFLOW_CONFINED
+#      7 : POLE

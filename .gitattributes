@@ -1,0 +1,6 @@
+*.cpp encoding=GBK
+*.c encoding=GBK
+*.cxx encoding=GBK
+*.h encoding=GBK
+*.hxx encoding=GBK
+*.hpp encoding=GBK

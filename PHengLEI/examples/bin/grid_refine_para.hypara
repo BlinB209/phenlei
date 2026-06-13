@@ -1,0 +1,31 @@
+#########################################################################
+#                           Grid data type                              #
+#########################################################################
+// gridtype: Grid type for generation, conversion, reconstruction, merging.
+//           0 -- Unstructured grid.
+//           1 -- Structured grid.
+// gridobj:  Task type of grid treatment.
+//           0 -- Grid generation of typical case, such as cylinder, flat plate, etc.
+//           1 -- Grid conversion, from other grid data to PHenglEI, such as Fluent, CGNS.
+//           2 -- Grid refinement.
+//           3 -- Grid merging, merge two blocks into one block.
+//           4 -- Grid deformation, achieve unstructured grid deformation.
+//           5 -- Grid repairing, repair the original grid in order to remove the negative volume cells.
+//           6 -- Grid mirroring, mirror a symmetry grid to whole grid.
+//			 7 -- Grid type change, convert structured grid to unstructured grid.
+// anisoRefine: If refine grid by anisoRefine type.
+//              0 -- Not. (default)
+//              1 -- Yes.
+int gridtype    = 0;
+int gridobj     = 2;
+int anisoRefine = 0;
+
+#########################################################################
+#                           File path                                   #
+#########################################################################
+// from_gfile: path of original data file for unstructure grid convert from.
+// out_gfile:  path of target file for grid convert to, *.fts type of file usually.
+string from_gfile = "./grid/M6_unstr__4.fts";
+string out_gfile  = "./grid/M6_unstr_refined__4.fts";
+
+

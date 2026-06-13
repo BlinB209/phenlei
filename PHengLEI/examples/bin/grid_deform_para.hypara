@@ -1,0 +1,34 @@
+// ----------------- Grid Deform Parameters -----------------------------
+// gridobj:  Task type of grid treatment.
+//           4 -- Grid deformation, achieve unstructured grid deformation.
+// deformationMethod: Grid Deform.
+//                1 -- SPRING.
+//                2 -- RBF.
+// stationalGridFile: Original grid file.
+// visualFileName   : The visualization file path of deform grid.
+// nDeformStep      : The max deform step.
+// flapAngle        :   The max flap angle.
+// rotatePostionZ   : Rotate postion.
+// rotatePostionY   : Rotate postion.
+// gridSlice        : If dump slice grid.
+// sliceAxis        : Grid slice axis.
+// slicePosition    : Grid slice position.
+int    gridobj        = 4;
+int    nDeformStep    = 40;
+double flapAngle      = 10.0;
+double rotatePostionZ = 4.00003;
+double rotatePostionY = 3.05;
+
+int    deformationMethod = 2;
+string stationalGridFile = "./grid/Segment2Brid.fts";
+string visualFileName    = "./results/deformedGrid.dat"
+
+int    gridSlice     = 1;
+int    sliceAxis     = 1;
+double slicePosition = 13;
+
+// ----------------- RBF Parameters -------------------------------------
+// numberOfReferenceCP : Number of reference Control Points.
+// influencePara       : The RBF influence radius parameter.
+int numberOfReferenceCP = 40;
+double influencePara = 25.0;

@@ -1,0 +1,14 @@
+int    codeOfOversetGrid        = 1;
+
+int    numberOfGridGroups       = 2;
+string gridfile                 = "./grid/Wing__6.fts"; 
+string gridfile1                = "./grid/Missile__2.fts";
+
+int    symetryOrNot             = 0;
+int    readInAuxiliaryInnerGrid = 1;
+
+string auxiliaryInnerGrid0      = "./grid/WingIn.fts";
+string auxiliaryInnerGrid1      = "./grid/MissileIn.fts";
+
+int   twoOrderInterpolationOrNot = 0;
+int   keyEnlargeOfActiveNodes    = 0; 

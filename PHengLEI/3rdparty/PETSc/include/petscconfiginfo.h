@@ -1,0 +1,1 @@
+static const char *petscconfigureoptions = "--prefix=/home/wbq/PHengLEI_Project/Softwares/petsc-3.18.3-opt --with-x=0 --with-fc=0 --with-debugging=0 --with-shared-libraries=0 --COPTFLAGS=-O3 --CXXOPTFLAGS=-O3 --CFLAGS=-fPIE --CXXFLAGS=-fPIE --download-f2cblaslapack=/home/wbq/PHengLEI_Project/f2cblaslapack-3.8.0.q0.tar.gz";

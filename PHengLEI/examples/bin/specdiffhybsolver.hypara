@@ -1,0 +1,78 @@
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//          PPPPP  H   H  EEEEE  N    N  GGGGG  L      EEEEE  III         +  
+//          P   P  H   H  E      NN   N  G      L      E       I          +
+//          PPPPP  HHHHH  EEEEE  N N  N  G  GG  L      EEEEE   I          +
+//          P      H   H  E      N  N N  G   G  L      E       I          +
+//          P      H   H  EEEEE  N    N  GGGGG  LLLLL  EEEEE  III         +
+//------------------------------------------------------------------------+
+//          Platform for Hybrid Engineering Simulation of Flows           +
+//          China Aerodynamics Research and Development Center            +
+//                     (C) Copyright, Since 2010                          +
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//-----------------------------------------------------------------------
+#                      SpecDiffHybSolver Control Parameter              #
+//-----------------------------------------------------------------------
+int itask           = 1;
+int maxSimuStep     = 100000;
+double timeStep     = 5.0e-5;
+double refReNumber  = 395.0;
+double pressureGradient  = -1.0;
+int viscousType     = 1;
+string viscousName = "Smagorinsky";
+int intervalStepRes = 1000;
+int intervalStepStatistic = 10000;
+int intervalStepFlow  = 10000;
+int ischeme         = 3;
+int ibcscheme       = 3;
+int iVortProjection = 0;
+string outputdir    = "results";
+string resSaveFile  = "results/res.dat";
+string statisticVisualFile = "results/statisticVisual.dat"
+
+//-----------------------------------------------------------------------
+#                   SpecDiffHybSolver Grid Parameter                    #
+//-----------------------------------------------------------------------
+int nx        = 16;
+int ny        = 16;
+int nz        = 64;
+double XL    = 1.0;
+double YL    = 0.5;
+int irZinp = 0;
+double gama = 2.75;
+
+//-----------------------------------------------------------------------
+#              SpecDiffHybSolver Time-dependent Parameter               #
+//-----------------------------------------------------------------------
+int timeOrderOfConvectiveTerm = 2;
+int timeOrderOfPressureTerm   = 1;
+
+//-----------------------------------------------------------------------
+#                SpecDiffHybSolver Statistics Parameter                 #
+//-----------------------------------------------------------------------
+int startStatisticStep = 1;
+int statisticMethod = 1;
+double tavg   = 10.0;
+
+//-----------------------------------------------------------------------
+#                   SpecDiffHybSolver P3dfft Parameter                  #
+//-----------------------------------------------------------------------
+int dimensionOfP3DFFT[2] = 1, 1;   
+
+//-----------------------------------------------------------------------
+#                  SpecDiffHybSolver Rescale Parameter                  #
+//-----------------------------------------------------------------------
+int nRescaleFluctuation = 10000;
+int nRescaleUAverage    = 10000;
+int nFixUAverage        = 0;
+string DNSDataFile      = "chan395.dat";
+
+//-----------------------------------------------------------------------
+#                    SpecDiffHybSolver LES Parameter                    #
+//-----------------------------------------------------------------------
+int imode00fix = 0;
+double smagConstant = 0.1;
+double coefSigma = 1.5;
+string filterName = "spectral";
+int inutxyavg = 0;
+double testFilterScale = 2.0;

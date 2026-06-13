@@ -1,0 +1,211 @@
+#########################################################################
+#                     General Control Parameter                         #
+#########################################################################
+// maxSimuStep: The max simulation step, don't care simulation is restart or not.
+// intervalStepFlow: The step intervals for flow variables file 'flow.dat' saved.
+// intervalStepPlot: The step intervals for tecplot visual file 'tecflow.dat' saved.
+// intervalStepRes: The step intervals for residual 'res.dat' saved.
+int maxSimuStep       = 2000;
+int intervalStepFlow  = 2000;
+int intervalStepPlot  = 200;
+int intervalStepForce = 1;
+int intervalStepRes   = 1;
+
+// gridfile: The partitioned Grid file path, using relative path,
+//           which is relative to the working directory.
+string gridfile = "./grid/sub__4.fts";
+
+#########################################################################
+#                               Flow Parameter                          #
+#########################################################################
+
+//flowSolverName : SIMPLE/CompressibleSIMPLE/PISO
+string flowSolverName = "SIMPLE";
+
+// Initial value of flow variables 
+double initRho = 998.2;
+double initU = 3.05;
+double initV   = 0;
+double initW   = 0;
+double initP   = 0;
+double initMu =0.001003;
+double initRg  = 296.928571;
+double refP    = 101325;
+int refPLocate = 0；
+
+//Parameters For Solving the Momentum Equation
+// MomEqSolMethod : GaussSeidel(0)/GMRES(1)/Bicgstab(2)/AMG(3)/PCG(4)/FlexGMRES(5)/ILU(10)/AMGDD(11)/Hybrid(12)
+int MomEqSolMethod = 2;
+// MomEqPrecondMethod : None(0)/ILU(1)/AMG(2)/Euclid(3)/LduDiag(8) /LduDIC(9) /LduDILU(10)
+int MomEqPrecondMethod = 1;
+int MomEqMaxSweep = 30;
+double MomEqIterSolvTol = 1e-8;
+double MomEqRelaxCoeff = 0.5;
+
+//Parameters For Solving the Pressure Possion Equation
+// PPEqSolMethod : GaussSeidel(0)/GMRES(1)/Bicgstab(2)/AMG(3)/PCG(4)/FlexGMRES(5)/ILU(10)/AMGDD(11)/Hybrid(12)
+int PPEqSolMethod= 3;
+// PPEqPrecondMethod : None(0)/ILU(1)/AMG(2)/Euclid(3)/LduDiag(8) /LduDIC(9) /LduDILU(10)
+int PPEqPrecondMethod= 1;
+int PPEqMaxSweep = 30;
+double PPEqIterSolvTol = 1e-8;
+double PPEqRelaxCoeff = 0.3;
+
+//Relaxation factor of surface flux
+double FaceFluxRelaxCoeff = 0.5;
+
+int isCalGravityVisSource = 0;
+int bodyForceFlag = 0;
+double gravityX = 0.0;
+double gravityY = -9.81;
+double gravityZ = 0.0;
+
+int isBoussinesqApproximation        = 0;
+double thermalExpansionCoeff = 3.44827e-3;
+
+#########################################################################
+#                  Turbulence Equation Parameter                        #
+#########################################################################
+// isSolveTurb : is(1)/not(0);
+int isSolveTurb = 1；
+// TurbEqSolverName : k-epsilon(KE)/Spalart-Allmaras(SA)
+string TurbEqSolverName = "SA";
+
+// Initial value of Turbulence variables 
+double initKinetic = 0.0348844;
+double initEpsilon = 10.89987;
+
+//Parameters For Solving the Turbulence Equation
+// TurbEqSolMethod : GaussSeidel(0)/GMRES(1)/Bicgstab(2)/AMG(3)/PCG(4)/FlexGMRES(5)/ILU(10)/AMGDD(11)/Hybrid(12)
+int TurbEqSolMethod  = 2;
+// TurbEqPrecondMethod : None(0)/ILU(1)/AMG(2)/Euclid(3)/LduDiag(8) /LduDIC(9) /LduDILU(10)
+int TurbEqPrecondMethod = 1;
+int    TurbEqMaxSweep    = 30;
+double TurbEqIterSolvTol = 1e-8;
+double TurbEqRelaxCoeff = 0.5;
+
+#########################################################################
+#                     Energy Equation Parameter                         #
+#########################################################################
+// isSolveEnergy : is(1)/not(0);
+int isSolveEnergy = 0;
+
+// Initial value of Energy variables 
+double initT   = 273.15;
+double initCPg = 1007.0;
+double initK   = 0.0454;
+double initkappa = 1.4;
+double refT = 273;
+
+//Parameters For Solving the Energy Equation
+// EnergyEqSolMethod : GaussSeidel(0)/GMRES(1)/Bicgstab(2)/AMG(3)/PCG(4)/FlexGMRES(5)/ILU(10)/AMGDD(11)/Hybrid(12)
+int EnergyEqSolMethod = 2;
+// EnergyEqPrecondMethod : None(0)/ILU(1)/AMG(2)/Euclid(3)/LduDiag(8) /LduDIC(9) /LduDILU(10)
+int EnergyEqPrecondMethod = 1;
+int    EnergyEqMaxSweep    = 30;
+double EnergyEqIterSolvTol = 1e-8;
+double EnergyEqRelaxCoeff = 0.5;
+
+#########################################################################
+#                    Species Equation Parameter                         #
+#########################################################################
+// isSolveSpecies : is(1)/not(0);
+int isSolveSpecies = 0;
+
+//Parameters For Solving the Species Equation
+int numberOfSpeciesIncom = 1;
+string speciesNameIncom[] = [AIR];
+double initMassFractionIncom[] = [1.0];
+
+//Parameters For Solving the Species Equation
+// SpeciesEqSolMethod : GaussSeidel(0)/GMRES(1)/Bicgstab(2)/AMG(3)/PCG(4)/FlexGMRES(5)/ILU(10)/AMGDD(11)/Hybrid(12)
+int SpeciesEqSolMethod = 2;
+// SpeciesEqPrecondMethod : None(0)/ILU(1)/AMG(2)/Euclid(3)/LduDiag(8) /LduDIC(9) /LduDILU(10)
+int SpeciesEqPrecondMethod = 1;
+int    SpeciesEqMaxSweep   = 30;
+double SpeciesEqIterSolvTol  = 1e-8;
+double SpeciesEqRelaxCoeff = 0.5;
+
+#########################################################################
+#                               Unsteady Parameter                      #
+#########################################################################
+// iunsteady : is(1)/not(0);
+int iunsteady    = 0;
+double startTime = 0.0;
+double endTime   = 20;
+double dt = 0.1;
+int min_sub_iter = 50;
+int max_sub_iter = 50;
+
+// isStableUnsteadyMethod : is(1)/not(0);
+int isStableUnsteadyMethod = 0;
+
+#########################################################################
+#                               Solution Method                         #
+#########################################################################
+// ConvCalcMethod : UPWIND/CDS/QUICK/SUDS
+string ConvCalcMethod = "UPWIND"
+
+// DiffCalcMethod : NON_ORTHOGONAL(default)
+string DiffCalcMethod = "NON_ORTHOGONAL";
+
+//TranCalcMethod : IMPLICIT_EULER(1st)/IMPLICIT_2ND_ORDER(2st)
+string TranCalcMethod = "IMPLICIT_EULER";
+
+// GradCalcMethod : GAUSS/LSQ
+string GradCalcMethod = "GAUSS";
+
+// mathLibType : hypre(0)/unap(1)/yhamg(2)
+int mathLibType = 0;
+
+// compressible : is(0, default)/not(1)
+int compressible = 0;
+
+// SIMPLEC : SIMPLE(0)/SIMPLEC(1)
+int SIMPLEC = 1;
+
+// isSkewness : stable gradient method: is(1)/not(0)
+int isSkewness = 0;
+
+//rhoType : Constant(0)/IncompressibleIdealGas(1)/IdealGas(2)
+int rhoType = 0;
+
+//muType:  Constant(0)/SutherLand(1)/IdealGasMixingLaw(2),
+int muType  = 0;
+
+//kType : Constant(0)/MassWeightedMixingLaw(1)/IdealGasMixingLaw(2)
+int kType   = 0;
+
+//cpType : Constant(0)/Mixing(1)
+int cpType  = 0;
+
+//massdiffType : ConstantDiluteApprox(1)/DiluteApprox(2)
+int massdiffType = 0;
+
+#########################################################################
+#                              Post-Processing                          #
+#########################################################################
+/ nVisualVariables: Number of variables want to be dumped for tecplot visualization.
+// visualVariables : Variable types dumped, listed as following:
+// -- U(22), V(23), W(24), P(25), CP(26), T(27), DEN(28), VIS(29), TE(31), ED(32), enthalpy(70), species(from 71 ~ 70 + numberOfSpecies)
+// Important Warning: Array size of visualVariables MUST be equal to nVisualVariables!!!
+// Variables order must from small to big.
+
+int nVisualVariables = 6;
+int visualVariables[] = [22, 23, 24, 25, 29, 31];
+int plotFieldType = 1;
+
+string resSaveFile      = "results/res.dat";
+string aircoeffile      = "results/aircoeff.dat";
+
+
+
+
+
+
+
+
+
+
+
+

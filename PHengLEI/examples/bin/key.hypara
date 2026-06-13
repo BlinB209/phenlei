@@ -1,0 +1,52 @@
+string title = "PHengLEI Main Parameter Control File";
+
+// IMPORTANT NOTICE: DON NOT MODIFY THE FOWLLOWING LINE.
+string defaultParaFile = "./bin/cfd_para.hypara";
+
+// ndim: Dimensional of the grid, 2 or 3.
+// nparafile: the number of parameter files.
+// nsimutask: simulation task type.
+//            0 -- CFD Solver of NS or Turbulation.
+//            1 -- Grid generation: for special typical cases, such as cylinder, flat plate, etc.
+//                 Grid conversion: from other format to PHengLEI format (.fts).
+//                 Grid reconstruction: such as grid adaptation.
+//                 Grid merging: merge two blocks into one block.
+//                 Grid repairing: repair the original grid in order to remove the negative volume cells.
+//            2 -- Wall distance computation for turb-solver.
+//            3 -- Grid partition.
+int ndim      = 2;
+int nparafile = 1;
+
+int    nsimutask    = 0;
+//string parafilename = "./bin/cfd_para_subsonic.hypara";
+string parafilename = "./bin/cfd_para_transonic.hypara";
+//string parafilename = "./bin/cfd_para_supersonic.hypara";
+//string parafilename = "./bin/cfd_para_hypersonic.hypara";
+//string parafilename = "./bin/cfd_para_incompressible.hypara";
+
+//int    nsimutask    = 1;
+//string parafilename = "./bin/grid_para.hypara";
+
+//int    nsimutask    = 2;
+//string parafilename = "./bin/cfd_para.hypara";
+
+//int    nsimutask    = 3;
+//string parafilename = "./bin/partition.hypara";
+
+//int    nsimutask    = 1;
+//string parafilename = "./bin/grid_deform_para.hypara";
+
+//int    nsimutask    = 1;
+//string parafilename = "./bin/grid_refine_para.hypara";
+
+//int    nsimutask    = 14;
+//string parafilename = "./bin/integrative_solver.hypara";
+
+//int    nsimutask    = 99;
+//string parafilename = "./bin/post_processing.hypara";
+
+// ---------------- Advanced Parameters, DO NOT care it ----------------
+int numberOfGridProcessor = 0;
+// ATP read
+//@string parafilename1 = ""
+//@string parafilename2 = "";

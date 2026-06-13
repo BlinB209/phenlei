@@ -1,0 +1,44 @@
+int    codeOfAleModel = 1;
+
+#########################################################################
+#                           motive information                          #
+#########################################################################
+int    numberOfMovingBodies = 1;
+
+##############################    body0    ##############################
+//mass of parts
+double mass_0                  = 1.0;
+//gravity of parts
+double gravity_0                  = 0.0;
+//mass matrix of parts                Ixx       Iyy       Izz       Ixy       Ixz       Iyz
+double massMatrix_0[]          = 1e-7,     1e-6,     1e-6,     0.0,      0.0,      0.0;
+//initial six DOF position information of parts.    xc        yc        zc
+double massCenter_0[]          = 0.265 ,    0.0,      0.0;
+//if reset mass center while restart
+int resetMassCenter_0          = 0;
+//position offset of parts.       dx       dy        dz
+double massCenterDxyz_0[]      = 0.0,     0.0,      0.0;
+//initial six DOF position information of parts.    angleX    angleY    angleZ
+double attitudeAngle_0[]       = 0.0 ,     0.0,      0.0;
+//initial six DOF motion information of parts.    vc        vy        vz
+double massCenterVelocity_0[]  = 0.0,      0.0,      0.0;
+//initial six DOF motion information of parts.     omigX     omigY     omigZ
+double angularVelocity_0[]     = 0.0,      0.0,      0.0;
+//the object that the parts belong to.
+int    fartherIndex_0          = -1;
+//the assembly position of the parts.                xc        yc        zc        angleX    angleY    angleZ
+double configPamameter_0[]     = 0.0      ,0.0      ,0.0      ,0.0      ,0.0      ,0.0;
+//the motion partten of the parts.	 
+int  RBDMethod_0                = 14;
+double amplitude_0              = 2.41;
+double reduceFrequency_0        = 0.0808;
+//string uDFSixDofFileName_0    = "./Bin/UDFSixDof.Parameter";
+//dimensional physical time for additional force(s)
+double addedForceTime_0[]       = 0.0;
+//additional force  (system axis)              fX        fY        fZ        
+double addedForce_0[]           = 0.0      ,0.0      ,0.0       ;
+//additional moment of Force  (system axis)              mX        mY        mZ        
+double addedMoment_0[]          = 0.0      ,0.0      ,0.0       ;
+
+int integralOrder   = 4;
+int storeAleWalldis = 0;

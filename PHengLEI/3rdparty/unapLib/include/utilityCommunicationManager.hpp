@@ -1,0 +1,274 @@
+﻿/* Copyright (C)
+ * 2019 - Hu Ren, rh890127a@163.com
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ */
+/**
+ * @file communicationManager.hpp
+ * @brief Class CommunicationManager that provides communicator manipulation
+ * interfaces, a global commnunicator and global communication interfaces
+ * unified in parallel mode and sequentioal mode.
+ * @author Hu Ren, rh890127a@163.com
+ * @version v0.1
+ * @date 2019-08-12
+ */
+
+#ifndef UTILITY_COMMUNICATIONMAGAGER_HPP
+#define UTILITY_COMMUNICATIONMAGAGER_HPP
+
+#include "utilityBasicFunction.h"
+#include "utilityCommunicator.hpp"
+#include "utilityContainer.hpp"
+#include "utilityUsingCpp.hpp"
+
+// using namespace UTILITY;
+
+namespace UTILITY {
+class CommunicationManager {
+ private:
+  //--------------------------------------------------------------
+  // global info
+  //--------------------------------------------------------------
+
+  Communicator *globalComm_;  ///< global communicator
+
+  int globalSize_;  ///< global size
+
+  int globalRank_;  ///< global rank
+
+  //--------------------------------------------------------------
+  // IO object
+  //--------------------------------------------------------------
+
+  OStream *pOut_;  ///< objects connected with local process
+
+  OStream *pErr_;  ///< objects connected with local process and std out
+
+  //--------------------------------------------------------------
+  // private funcations
+  //--------------------------------------------------------------
+  // defult set up for a communicator
+  int setup(Communicator &comm) {
+    MPI_Comm_size(comm.comm_, &comm.size_);
+    MPI_Comm_rank(comm.comm_, &comm.rank_);
+
+    if (comm.getMyId() == 0)
+      comm.log_ = new OStream(comm.fname_);
+    else
+      comm.log_ = new DummyOStream();
+    return 0;
+  }
+
+ public:
+  //--------------------------------------------------------------
+  // construction and deconstruction
+  //--------------------------------------------------------------
+  /**
+   * @brief CommunicationManager
+   * main constructor
+   *
+   * @param argc pointer to the parameters from main function
+   * @param argv pointer to the parameters from main function
+   */
+  CommunicationManager(int *argc, char ***argv);
+
+  /**
+   * @brief create log files
+   * @param if false,  dummy OStream will be created
+   */
+  void createLogFile(bool TorF);
+
+  /**
+   * @brief ~CommunicationManager
+   * defult deconstructor
+   *
+   */
+  ~CommunicationManager();
+
+  //--------------------------------------------------------------
+  // registeration for runtime selection
+  //--------------------------------------------------------------
+  typedef CommunicationManager *(*CommunicationManagerCreatePtr)(int *argc,
+                                                                 char ***argv);
+  /**
+   * @brief
+   * the selecting table with the keys being the hash value of the class
+   * name (or alias) and the value the create function pointer of each derived
+   * classes.
+   */
+  static Table<Word, CommunicationManagerCreatePtr> selectingTable;
+
+  /**
+   * @brief New
+   * A factory interface to create object of this class or derived classes.
+   *
+   * @param argc parameter from main function
+   * @param argv parameter from main function
+   * @param type the name (or alise) of this or derived classes
+   * @return
+   */
+  static CommunicationManager *New(int *argc, char ***argv,
+                                   const Word type = "MPI") {
+    return CommunicationManager::selectingTable.find(type)->second(argc, argv);
+  }
+
+  //--------------------------------------------------------------
+  // complex communicator creation and manipulation
+  //--------------------------------------------------------------
+
+  /**
+   * @brief duplicate
+   * Copy constructor.
+   *
+   * @param[in] refComm reference communicator
+   * @param[out] newComm a copy of the reference communicator
+   * @return
+   */
+  int duplicate(const Communicator &refComm, Communicator &newComm);
+
+  /**
+   * @brief split
+   * split the referenced communicator to non-overlaping sub-communicators.
+   *
+   * @param[in] refComm the reference communicator on which to do splitting
+   * @param[out] newComm the new communicator generated by splitting
+   * @param[in] color tag to identify the grouping rule.
+   * @param[in] nPart the number of new communicators, used only for result
+   * checking
+   * @param[in] priority priority to determine the process id, defult is 1.
+   * @return
+   */
+  int split(const Communicator &refComm, Communicator &newComm, const int color,
+            const unsigned int nPart, const int priority = 1);
+
+  /**
+   * @brief extract
+   * extract a communicator to from the reference communicator.
+   *
+   * @param[in] refComm the reference communicator on which to do extraction
+   * @param[out] newComm the new communicator generated by extraction
+   * @param[in] color tag to identify whether local process will participate in
+   * the new communicator or not.
+   * checking
+   * @param[in] priority priority to determine the process id, defult is 1.
+   * @return
+   */
+  int extract(const Communicator &refComm, Communicator &newComm,
+              const bool color, int priority = 1);
+
+  /**
+   * @brief reBalance
+   * calculate rebalance solution of the input communicators ( from different
+   * processes)
+   *
+   * @param[in] oldComm The local communicator to be rebalanced with other
+   * remote communicators All the input communicators must have NO
+   * intersections with each other.
+   * @param[out] newComm The new local communicator generated with better load
+   * balance.
+   * @param[in] weight non-negetive integer representing the weight of local
+   * process
+   * @param[in] thresholdRatio ratio to ideal load balance (100%), non-negative
+   * @return
+   */
+  int reBalance(const Communicator &oldComm, Communicator &newComm,
+                const int weight, const float thresholdRatio);
+
+  // TODO, Cartesian-topology communicator constructor
+  int createCart(const Communicator &refComm, Communicator &newComm,
+                 const int ndims, const int *dims, int *periods,
+                 int reorder = 1) {
+    cerr << __FILE__ << " +" << __LINE__ << ":" << endl
+         << __FUNCTION__ << ":" << endl
+         << "Error: createCart is not implemented! " << endl;
+    abort();
+  }
+
+  // TODO, graph-topology communicator constructor
+  int createGraph(const Communicator &refComm, Communicator &newComm,
+                  const int degree, const int *dests, const int *weights,
+                  const int reorder = 1) {
+    cerr << __FILE__ << " +" << __LINE__ << ":" << endl
+         << __FUNCTION__ << ":" << endl
+         << "Error: createGraph is not implemented! " << endl;
+    abort();
+  }
+
+  /**
+   * @brief destroy
+   * Free the content of the communicator
+   * @param[in] comm
+   * @return
+   */
+  int destroy(Communicator &comm) {
+    if (comm.comm_) MPI_Comm_free(&(comm.comm_));
+    if (comm.log_) delete comm.log_;
+    return 0;
+  }
+
+  //--------------------------------------------------------------
+  // Access
+  //--------------------------------------------------------------
+  bool isParallel() {
+    if (globalSize_ > 1)
+      return true;
+    else
+      return false;
+  }
+
+  Communicator &getGlobalComm() { return *globalComm_; }
+
+  int getGlobalId() { return globalRank_; }
+
+  int getGlobalSize() { return globalSize_; }
+
+  /**
+   * @brief calculateBalance
+   * calculate the balance ratio of the input communicators ( from different
+   * processes)
+   *
+   * @param[in] refComm The local communicator to be rebalanced with other
+   * remote communicators All the input communicators must have NO
+   * intersections with each other.
+   * @param[in] weight non-negetive integer representing the weight of local
+   * process
+   * @return current ratio to ideal load balance (100%), non-negative
+   */
+  float calculateBalance(const Communicator &refComm, const int weight);
+
+  //--------------------------------------------------------------
+  // parallel standard I/O
+  //--------------------------------------------------------------
+  /**
+   * @brief pOut
+   * return an IO object that is pre-connected with a log file of the current
+   * process.
+   *
+   * @return
+   */
+  OStream &pOut() { return *pOut_; }
+
+  /**
+   * @brief pErr
+   * return a multi-file IO object that is pre-connected with screen output and
+   * process log file
+   * @return
+   */
+  OStream &pErr() { return *pErr_; }
+};
+
+}  // namespace UTILITY
+
+#endif  // HSF_COMMUNICATIONMAGAGER_HPP

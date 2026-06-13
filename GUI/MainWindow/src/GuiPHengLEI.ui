@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui version="4.0">
+  <class>GUIPHengLEIClass</class>
+  <widget class="QMainWindow" name="GUIPHengLEIClass">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1280</width>
+        <height>900</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>GUIPHengLEIClass</string>
+    </property>
+    <property name="styleSheet">
+      <string notr="true"/>
+    </property>
+    <widget class="QWidget" name="centralwidget">
+      <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="leftMargin">
+          <number>0</number>
+        </property>
+        <property name="topMargin">
+          <number>0</number>
+        </property>
+        <property name="rightMargin">
+          <number>0</number>
+        </property>
+        <property name="bottomMargin">
+          <number>0</number>
+        </property>
+        <item>
+          <widget class="QSplitter" name="splitter">
+            <property name="orientation">
+              <enum>Qt::Vertical</enum>
+            </property>
+            <widget class="QStackedWidget" name="vtkMainDrawWidget">
+              <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>1</verstretch>
+                </sizepolicy>
+              </property>
+              <property name="currentIndex">
+                <number>1</number>
+              </property>
+            </widget>
+            <widget class="QFrame" name="frame_output">
+              <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+              </property>
+            </widget>
+          </widget>
+        </item>
+      </layout>
+    </widget>
+    <widget class="QMenuBar" name="menubar">
+      <property name="geometry">
+        <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1280</width>
+          <height>26</height>
+        </rect>
+      </property>
+    </widget>
+    <widget class="QStatusBar" name="statusbar"/>
+    <widget class="QDockWidget" name="controlDockWidget">
+      <property name="sizePolicy">
+        <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>1</verstretch>
+        </sizepolicy>
+      </property>
+      <property name="minimumSize">
+        <size>
+          <width>300</width>
+          <height>44</height>
+        </size>
+      </property>
+      <property name="features">
+        <set>QDockWidget::DockWidgetClosable</set>
+      </property>
+      <property name="allowedAreas">
+        <set>Qt::LeftDockWidgetArea</set>
+      </property>
+      <property name="windowTitle">
+        <string/>
+      </property>
+      <attribute name="dockWidgetArea">
+        <number>1</number>
+      </attribute>
+      <widget class="QWidget" name="controlWidget">
+        <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>1</horstretch>
+            <verstretch>1</verstretch>
+          </sizepolicy>
+        </property>
+      </widget>
+    </widget>
+    <widget class="QDockWidget" name="drawDockWidget">
+      <property name="minimumSize">
+        <size>
+          <width>97</width>
+          <height>44</height>
+        </size>
+      </property>
+      <property name="floating">
+        <bool>false</bool>
+      </property>
+      <property name="allowedAreas">
+        <set>Qt::BottomDockWidgetArea|Qt::RightDockWidgetArea</set>
+      </property>
+      <property name="windowTitle">
+        <string>监控控制面板</string>
+      </property>
+      <attribute name="dockWidgetArea">
+        <number>2</number>
+      </attribute>
+      <widget class="QWidget" name="drawDockWidgetContents"/>
+    </widget>
+    <action name="action">
+      <property name="text">
+        <string>导入</string>
+      </property>
+    </action>
+    <action name="action_2">
+      <property name="text">
+        <string>导出</string>
+      </property>
+    </action>
+    <action name="action_5">
+      <property name="text">
+        <string>本地</string>
+      </property>
+    </action>
+    <action name="exitSystem">
+      <property name="text">
+        <string>退出</string>
+      </property>
+    </action>
+    <action name="newProject">
+      <property name="text">
+        <string>新建工程</string>
+      </property>
+    </action>
+    <action name="action_8">
+      <property name="text">
+        <string>打开工程</string>
+      </property>
+    </action>
+    <action name="action_9">
+      <property name="text">
+        <string>保存工程</string>
+      </property>
+    </action>
+    <action name="action_10">
+      <property name="text">
+        <string>传输工程</string>
+      </property>
+    </action>
+    <action name="action_11">
+      <property name="text">
+        <string>获取结果</string>
+      </property>
+    </action>
+    <action name="action_12">
+      <property name="text">
+        <string>参数配置</string>
+      </property>
+    </action>
+    <action name="startSolver">
+      <property name="text">
+        <string>启动</string>
+      </property>
+    </action>
+    <action name="stopSolver">
+      <property name="text">
+        <string>停止</string>
+      </property>
+    </action>
+    <action name="setTimer">
+      <property name="text">
+        <string>设置定时器</string>
+      </property>
+    </action>
+    <action name="action_17">
+      <property name="text">
+        <string>开始监控残差</string>
+      </property>
+    </action>
+    <action name="beginMonitorAirforce">
+      <property name="text">
+        <string>开始监控气动力</string>
+      </property>
+    </action>
+    <action name="action_19">
+      <property name="text">
+        <string>停止监控</string>
+      </property>
+    </action>
+    <action name="stopTimer">
+      <property name="text">
+        <string>停止定时器</string>
+      </property>
+    </action>
+    <action name="controlDockWidgetAction">
+      <property name="text">
+        <string>控制视图</string>
+      </property>
+    </action>
+    <action name="dataTableDockWidgetAction">
+      <property name="text">
+        <string>统计视图</string>
+      </property>
+    </action>
+    <action name="solverOutputDockWidgetAction">
+      <property name="text">
+        <string>监控视图</string>
+      </property>
+    </action>
+    <action name="action_28">
+      <property name="text">
+        <string>三维</string>
+      </property>
+    </action>
+    <action name="action_29">
+      <property name="text">
+        <string>二维</string>
+      </property>
+    </action>
+    <action name="actionXY">
+      <property name="text">
+        <string>XY图</string>
+      </property>
+    </action>
+    <action name="action_30">
+      <property name="text">
+        <string>云图</string>
+      </property>
+    </action>
+    <action name="action_31">
+      <property name="text">
+        <string>使用手册_c+a+o</string>
+      </property>
+      <property name="shortcut">
+        <string>Ctrl+Alt+O</string>
+      </property>
+    </action>
+    <action name="action_32">
+      <property name="text">
+        <string>理论手册</string>
+      </property>
+    </action>
+    <action name="about">
+      <property name="text">
+        <string>关于</string>
+      </property>
+    </action>
+    <action name="openFile">
+      <property name="text">
+        <string>打开</string>
+      </property>
+    </action>
+    <action name="displaySolverOutput">
+      <property name="checkable">
+        <bool>true</bool>
+      </property>
+      <property name="checked">
+        <bool>false</bool>
+      </property>
+      <property name="text">
+        <string>显示解算器输出</string>
+      </property>
+    </action>
+    <action name="action_3">
+      <property name="text">
+        <string>本机信息</string>
+      </property>
+    </action>
+    <action name="beginMonitorRes">
+      <property name="checkable">
+        <bool>true</bool>
+      </property>
+      <property name="text">
+        <string>监控残差</string>
+      </property>
+    </action>
+    <action name="beginMonitorAir">
+      <property name="checkable">
+        <bool>true</bool>
+      </property>
+      <property name="text">
+        <string>监控气动力</string>
+      </property>
+    </action>
+    <action name="beginMonitorSolver">
+      <property name="checkable">
+        <bool>true</bool>
+      </property>
+      <property name="text">
+        <string>控制台输出</string>
+      </property>
+    </action>
+  </widget>
+  <resources/>
+  <connections/>
+</ui>

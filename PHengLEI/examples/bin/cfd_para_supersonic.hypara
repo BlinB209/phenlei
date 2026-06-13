@@ -1,0 +1,190 @@
+#########################################################################
+#                     General Control Parameter                         #
+#########################################################################
+// maxSimuStep: The max simulation step, don't care simulation is restart or not.
+// intervalStepFlow: The step intervals for flow variables file 'flow.dat' saved.
+// intervalStepPlot: The step intervals for tecplot visual file 'tecflow.dat' saved.
+// intervalStepForce: The step intervals for aerodynamics coefficients file 'aircoef.dat' saved.
+// intervalStepRes: The step intervals for residual 'res.dat' saved.
+
+int maxSimuStep       = 20000;
+
+int intervalStepFlow  = 2000;
+int intervalStepPlot  = 2000;
+int intervalStepForce = 100;
+int intervalStepRes   = 10;
+
+#########################################################################
+#                       Inflow Parameter                                #
+#########################################################################
+// refMachNumber: Mach number.
+// attackd: Angle of attack.
+// angleSlide: Angle of sideslip.
+// wallTemperature: Temprature of the solid wall, minus value is for adiabatic boundary condition.
+// inflowParaType: The type of inflow parameters.
+//                 0 -- the nondimensional conditions.
+//                 1 -- the flight conditions.
+//                 2 -- the experiment conditions.
+//                 3 -- the subsonic boundary conditions.
+// refReNumber: Reynolds number, which is based unit length, unit of 1/m.
+// refDimensionalTemperature: Dimensional reference temperature, or the total temperature only for the experiment condition.
+// refDimensionalPressure: Dimensional reference pressure, or the total pressure only for the experiment condition.
+// height: Fly height, unit of km.
+// gridScaleFactor: The customizable unit of the grid, default value is 1.0 for meter.Common dimensions like:
+//                    1 dm = 0.1  m.
+//                    1 cm = 0.01 m.
+//                    1 mm = 0.001m.
+//                    1 inch             = 0.0254m.
+//                    1 foot = 12 inches = 0.3048m.
+//                    1 yard = 3  feet   = 0.9144m.
+// forceReferenceLength, forceReferenceLengthSpanWise, forceReferenceArea: Reference length, SpanWise length and area, independent of grid unit.
+// TorqueRefX, TorqueRefY, TorqueRefZ: Reference point, independent of grid unit.
+
+double refMachNumber = 5.00;
+double attackd       = 0.00;
+double angleSlide    = 0.00;
+
+double wallTemperature = -1.0;
+
+int inflowParaType = 0;
+double refReNumber = 1.0e5;
+double refDimensionalTemperature = 288.15;
+
+//int inflowParaType = 1;
+//double height = 0.001;
+
+//int inflowParaType = 2;
+//double refDimensionalTemperature = 6051.024;    // The total temperature, T*(1+(refGama-1)*M*M/2).
+//double refDimensionalPressure = 4.299696E09;    // The total pressure, p*(T0/T)^(refGama/(refGama-1)).
+
+double gridScaleFactor = 1.0;
+
+double forceReferenceLengthSpanWise = 1.0;    // unit of meter.
+double forceReferenceLength = 1.0;            // unit of meter.
+double forceReferenceArea = 1.0;              // unit of meter^2.
+double TorqueRefX = 0.0;                      // unit of meter. 
+double TorqueRefY = 0.0;                      // unit of meter.
+double TorqueRefZ = 0.0;                      // unit of meter.
+
+#########################################################################
+#                       Physical models                                 #
+#########################################################################
+// viscousType : Viscous model.
+//           0 -- Euler.
+//           1 -- Laminar.
+//           3 -- 1eq turbulent.
+//           4 -- 2eq turbulent.
+// viscousName: Laminar or tubulent model.
+//              -- "1eq-sa", when viscousType = 3.
+//              -- "2eq-kw-menter-sst", when viscousType = 4.
+// DESType: Type of DES.
+//          0 -- RANS.(default)
+//          1 -- DES.
+//          2 -- DDES.
+//          3 -- IDDES.
+
+//int    viscousType = 0;
+//string viscousName = "Euler";
+
+//int    viscousType = 1;
+//string viscousName = "laminar";
+
+//int    viscousType = 3;
+//string viscousName = "1eq-sa";
+
+int    viscousType = 4;
+string viscousName = "2eq-kw-menter-sst";
+
+int DESType = 0;
+
+int roeEntropyFixMethod = 3;
+double roeEntropyScale  = 1.0;
+#########################################################################
+#                       Spatial Discretisation                          #
+#########################################################################
+#*******************************************************************
+#                       Struct Solver                              *
+#*******************************************************************
+// inviscidSchemeName: Spatial discretisation scheme of struct grid.
+//                     Using this when solve structered grid or hybrid.
+//                     -- "vanleer", "steger", "ausmpw", "ausmpw+".
+// str_limiter_name: Limiter of struct grid.
+//                   -- "minmod", "3rd_minmod_smooth".
+
+string inviscidSchemeName = "roe";
+string str_limiter_name   = "minvan";
+
+#*******************************************************************
+#                       UnStruct Solver                            *
+#*******************************************************************
+// uns_scheme_name: Spatial discretisation scheme of Unstruct grid.
+//                  Using this when solve Unstructered grid or hybrid.
+//                  -- "vanleer", "roe", "steger", "kfvs", "lax_f", "hlle".
+//                  -- "ausm+", "ausmdv", "ausm+w", "ausmpw", "ausmpwplus".
+// uns_limiter_name: Limiter of Unstruct grid.
+//                   -- "vencat", "barth".
+//                   -- "1st", meaning accuracy of first-order.
+//                   --  "nolim", no limiter.
+// venkatCoeff: Coefficient of vencat limiter, when uns_limiter_name = 'vencat'.
+//              The smaller the value, the more robust it is.
+
+string uns_scheme_name  = "vanleer";
+string uns_limiter_name = "vencat";
+double venkatCoeff      = 0.5;
+
+#########################################################################
+#                       Temporal Discretisation                         #
+#########################################################################
+// iunsteady: Steady or unsteady.
+//            0 -- steady.
+//            1 -- unsteay.
+// CFLEnd: The CFL number, [0.1, 100].
+//         The bigger the value, the convergence faster but lower robustness.
+// ktmax: The lower the value, the more robustness, 1.0e5 - 1.0e10.
+
+int iunsteady = 0;
+
+double CFLEnd = 2.0;
+
+double ktmax = 1.0e10;
+
+#########################################################################
+#                       File In or Out                                  #
+#########################################################################
+// gridfile: The partitioned Grid file path, using relative path,
+//           which is relative to the working directory.
+// IMPORTANT WARNING: The file index should be ignored,
+//                     e.g. if the partitioned grid is rae2822_hybrid2d__4_0.fts,
+//                     Please use 'rae2822_hybrid2d__4.fts' here!
+// plotFieldType: If dump out the whole field results to tecplot or not, 0 / 1.
+
+string gridfile = "./grid/rae2822_hybrid2d__4.fts";
+int plotFieldType = 0;
+
+// ----------------- Advanced Parameters, DO NOT care it ----------------
+// nVisualVariables: Number of variables want to be dumped for tecplot visualization.
+// visualVariables:  Variable types dumped, listed as following:
+//                   -- density(0), u(1), v(2), w(3), pressure(4), temperature(5), mach(6),
+//                   -- viscosityLaminar(7), viscosityTurbulent(8),
+//                   -- vorticity_x(9), vorticity_y(10), vorticity_z(11), vorticityMagnitude(12),
+//                   -- strain_rate(13), Q_criteria(14), Cp(15), timeStep(16), volume(17),
+//                   -- modeledTKE(18), modeleddissipationrate(19), SSTF1(20), SSTF2(21).
+// Important Warning: Array size of visualVariables MUST be equal to nVisualVariables!!!
+// Variables order must from small to big.
+
+int nVisualVariables = 8;
+int visualVariables[] = [0, 1, 2, 3, 4, 5, 6, 15];
+
+// limitVariables: Limit model (It is useful only if limitVector is 0).
+//                 0 -- limit only for pressure and denstiny, then get the min value.
+//                 1 -- limit for every variables, then get the min value.
+// limitVector:
+//              0 -- Each variable use the same limiter coefficient.
+//              1 -- Each variable use the respective limiter coefficients.
+// reconmeth:
+//            0 -- When reconstruct face value, Q+, Q- use respective limiter coefficients.
+//            1 -- Q+, Q- use the min limiter coefficients of left and right cell.
+
+int reconmeth = 0;
+int limitVariables = 0;
+int limitVector = 1;

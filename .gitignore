@@ -1,0 +1,38 @@
+﻿/.vs
+/.vscode
+/API/bin/
+/CFD/bin/
+/GPU/bin/
+/Mesh/bin/
+/PHengLEI/build/
+/PHengLEI/3rdparty/eigen
+
+# Binary executables
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.exp
+
+# Build outputs
+*.obj
+*.o
+*.so
+*.dylib
+*.suo
+*.user
+
+# Archives (source tarballs - keep unzipped libs only)
+*.zip
+*.tar.gz
+*.7z
+*.rar
+
+# Results / output data
+PHengLEI/examples/results/
+
+# Temp
+*.tmp
+*~
+.DS_Store
+Thumbs.db

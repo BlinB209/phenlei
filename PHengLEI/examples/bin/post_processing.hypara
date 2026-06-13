@@ -1,0 +1,34 @@
+#########################################################################
+#                     General Control Parameter                         #
+#########################################################################
+// postTask:    Task type of post processing
+//              0: Computer Air Force Coef.
+// gridfile:    The Grid file path.
+// restartNSFile: The file path of flowfield data.
+// turbfile     : The file path of turbulence flowfield data.
+
+int postTask = 0;
+string gridfile      = "./grid/partitionTestUns__2.fts";
+string restartNSFile = "./results/flow.dat";
+string turbfile      = "./results/turb.dat";
+
+// viscousType : Viscous model.
+//           0 -- Euler.
+//           1 -- Lamilar.
+//           3 -- 1eq turbulent.
+//           4 -- 2eq turbulent.
+int    viscousType    = 4;
+
+// refMachNumber: Mach number.
+// refReNumber: Reynolds number, which is based unit length, unit of 1/m.
+double refMachNumber = 0.2;
+double refReNumber = 6.5e6;
+
+// forceReferenceLength, forceReferenceLengthSpanWise, forceReferenceArea: Reference length, SpanWise length and area, independent of grid unit.
+// TorqueRefX, TorqueRefY, TorqueRefZ: Reference point, independent of grid unit.
+double forceReferenceLengthSpanWise = 1.0;    // unit of meter.
+double forceReferenceLength = 1.0;            // unit of meter.
+double forceReferenceArea = 1.0;              // unit of meter^2.
+double TorqueRefX = 0.0;                      // unit of meter. 
+double TorqueRefY = 0.0;                      // unit of meter.
+double TorqueRefZ = 0.0;                      // unit of meter.
